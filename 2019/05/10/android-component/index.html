@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Android系统发展至今已经比较成熟，从每年的Google I/O 大会也可以看出，Google I/O大会的主题，从原来的Mobile First到AI First转变，实际上近两年Android系统也没有什么重大更新，除了加入AI元素，更多的还是系统性能提升，以及一些细节优化。随着Android的成熟，Google也开始注重开发效率的提升，从Kotlin的推出到官方出品的各种组件库，以及最近">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android组件化业界方案总结">
+<meta property="og:url" content="http://yoursite.com/2019/05/10/android-component/index.html">
+<meta property="og:site_name" content="Waterstar&#39;s Blog">
+<meta property="og:description" content="Android系统发展至今已经比较成熟，从每年的Google I/O 大会也可以看出，Google I/O大会的主题，从原来的Mobile First到AI First转变，实际上近两年Android系统也没有什么重大更新，除了加入AI元素，更多的还是系统性能提升，以及一些细节优化。随着Android的成熟，Google也开始注重开发效率的提升，从Kotlin的推出到官方出品的各种组件库，以及最近">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/img/1/20180605194747.png">
+<meta property="og:image" content="http://yoursite.com/img/1//20180622105946.png">
+<meta property="og:image" content="http://yoursite.com/img/1//20180622112056.png">
+<meta property="og:image" content="http://yoursite.com/img/1/20180626105329.png">
+<meta property="og:image" content="http://yoursite.com/img/1/20180626110721.png">
+<meta property="og:image" content="http://yoursite.com/img/1/20180626171324.png">
+<meta property="og:image" content="http://yoursite.com/img/1/163aeed44d514808.jpg">
+<meta property="og:updated_time" content="2019-05-10T14:52:15.464Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android组件化业界方案总结">
+<meta name="twitter:description" content="Android系统发展至今已经比较成熟，从每年的Google I/O 大会也可以看出，Google I/O大会的主题，从原来的Mobile First到AI First转变，实际上近两年Android系统也没有什么重大更新，除了加入AI元素，更多的还是系统性能提升，以及一些细节优化。随着Android的成熟，Google也开始注重开发效率的提升，从Kotlin的推出到官方出品的各种组件库，以及最近">
+<meta name="twitter:image" content="http://yoursite.com/img/1/20180605194747.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/05/10/android-component/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Android组件化业界方案总结 | Waterstar's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Waterstar's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/10/android-component/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Waterstar">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/2089949?s=460&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Waterstar's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Android组件化业界方案总结
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-10 22:44:30 / 修改时间：22:52:15" itemprop="dateCreated datePublished" datetime="2019-05-10T22:44:30+08:00">2019-05-10</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Android系统发展至今已经比较成熟，从每年的Google I/O 大会也可以看出，Google I/O大会的主题，从原来的Mobile First到AI First转变，实际上近两年Android系统也没有什么重大更新，除了加入AI元素，更多的还是系统性能提升，以及一些细节优化。随着Android的成熟，Google也开始注重开发效率的提升，从Kotlin的推出到官方出品的各种组件库，以及最近的App Bundle可见一斑。</p>
+<p>移动端App经过几年的发展，功能已经相对丰富和稳定，然而随之而来的是代码的臃肿，耦合，常常牵一发而动全身，严重影响开发效率以及项目的稳定。于是模块化这种古老的思想开始在移动端应用，分而治之，每个模块单独开发维护，模块间通过相对简单的方式进行通信，从而降低整个App的耦合度，复杂度，提高效率和稳定性。然而不幸的是，Android目前并没有官方支持的模块化开发方式(App Bundle刚出，限制也比较多)，各路Android大神各显神通，网上相关文章非常多，单其中一个问题的解决就可以找到几个库。JOOX目前正在对项目进行重构，对业界组件化相关的解决方案做了一下总结。</p>
+<a id="more"></a>  <br><br>目录<br><br>- 一， 插件化与组件化<br><br>- 二，为什么要组件化<br><br>- 三，组件化主要问题和业界方案对比<br><br>- 四，总结<br><br>  ​<br><br>一，插件化与组件化<br><br>我们首先来区分下概念，“插件化”更多的体现在结果，即某个功能模块可以不跟随App安装时立即安装在系统，可以在随后开发者认为合适的时机动态地加载。而“组件化”更多提现在过程，强调的开发模式，即在开发过程中不同功能模块的代理可以隔离，单独维护开发。组件化并不具备插件化运行时动态加载功能的特性。<br><br>二，为什么要组件化<br><br>组件化可以达到什么效果呢？ 一个完全组件化的项目大概是这样的：<br><br><img src="/img/1/20180605194747.png" alt="20180605194747"><br><br>- 对于每一个组件，如图中的组件A，B，C等可以单独作为一个Android App运行，也可以被当成library被集合到主App中运行。<br><br>- 在开发阶段主App可以选择加载任意一个或多个组件，而不需要每个组件都加载。<br><br>- 开发阶段任意一个组件都不能直接去引用另外一个组件的代码，即在gradle中一个组件并不会直接去compile另外一个组件，开发人员连代码都import不了，这样就实现了代码的物理隔离。<br><br>  从以上特性可以看出，组件化的项目有以下优势：<br><br>- 编译速度更快<br>  虽然现在有instant run和其他编译优化组件但是实际使用时还是有很多坑，组件化使得每次运行只加载需要的代码，即使clean整个项目，编译速度而已可以大大提高。<br><br>- 调试方便<br><br>  想象下没有组件化时，终端同学与后台同学调试接口是是怎样的？我们必须整个项目运行，同时有时候业务逻辑比较复杂时，我们需要进行很多的操作，才能进入到对应的功能界面进行调试，而组件化后，我们可以单独启动需要调试的业务模块，单独调试。<br><br>- 更专注业务，开发效率高。<br>  开发人员可以聚焦自己的业务开发，代码物理上已经隔离开，所以不需要担心自己的提交的代码会干扰别人，同时别人的代码也不会干扰自己。<br><br>- 项目更稳定<br>  组件化后每个组件应该是高度内聚的,我们可以很方便地进行单元测试，所以正常来说基础库，以及每个组件应该都是比较稳定的。<br><br>三，组件化主要问题和业界方案对比<br><br>​    组件化听起来很完美，但是实际上在Android平台上实现起来还是很多坑，接下来我们会总结下Android组件化过程中一些主要的问题以及业界的一些解决方案。<br><br>- <strong>单独运行，集成调试，代码隔离</strong><br>  上面提到对于组件化的项目，每个组件可以单独运行，也可以被集成到主app中，那具体是怎么实现的呢？<br><br>  <img src="/img/1//20180622105946.png" alt="20180622105946"><br><br>  以上面的demo工程为例，module component_a和component_b既可以被Android Application也可以被当成Android Library,  我们知道一个Android Studio的module 是library还是application是通过module的build.gradle配置的，<br><br>  <img src="/img/1//20180622112056.png" alt="20180622112056"><br><br>  所以实际很简单，我们可以定一个变量，来控制编译类型：<br><br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if (IsBuildModule.toBoolean()) &#123;</span><br><span class="line">    apply plugin: &apos;com.android.application&apos;</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    apply plugin: &apos;com.android.library&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  业界很多组件化方案基本都是利用这点进行改进，但是这种方法，每次修改gradle配置需要重新执行gradle sync，项目一大每次执行也需要比较长时间，所以需要进行改进，目前看到做得比较好的方案是得到App的方案<a href="https://github.com/mqzhangw/JIMU" target="_blank" rel="noopener">JIMU(</a>原先叫DDComponent,作者离职后改名为JIMU并单独维护)，作者在网上也有写了一些文章介绍， 不过组件单独运行集成调试这块作者并没有详细分析，我们clone下代码来看下，具体实现是自定义了一个gradle插件代码在JIMU/build-gradle/下的ComBuild.groovy里面</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">void apply(Project project) &#123;</span><br><span class="line">    ...</span><br><span class="line">  </span><br><span class="line">    //对于isRunAlone==true的情况需要根据实际情况修改其值，</span><br><span class="line">    // 但如果是false，则不用修改</span><br><span class="line">    boolean isRunAlone = Boolean.parseBoolean((project.properties.get(&quot;isRunAlone&quot;)))</span><br><span class="line">    String mainmodulename = project.rootProject.property(&quot;mainmodulename&quot;)</span><br><span class="line">    if (isRunAlone &amp;&amp; assembleTask.isAssemble) &#123;</span><br><span class="line">        //对于要编译的组件和主项目，isRunAlone修改为true，其他组件都强制修改为false</span><br><span class="line">        //这就意味着组件不能引用主项目，这在层级结构里面也是这么规定的</span><br><span class="line">        if (module.equals(compilemodule) || module.equals(mainmodulename)) &#123;</span><br><span class="line">            isRunAlone = true</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            isRunAlone = false</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    project.setProperty(&quot;isRunAlone&quot;, isRunAlone)</span><br><span class="line">  </span><br><span class="line">    //根据配置添加各种组件依赖，并且自动化生成组件加载代码</span><br><span class="line">    if (isRunAlone) &#123;</span><br><span class="line">        project.apply plugin: &apos;com.android.application&apos;</span><br><span class="line">        ....</span><br><span class="line">        System.out.println(&quot;apply plugin is &quot; + &apos;com.android.application&apos;)</span><br><span class="line">        if (assembleTask.isAssemble &amp;&amp; module.equals(compilemodule)) &#123;</span><br><span class="line">            compileComponents(assembleTask, project)</span><br><span class="line">            project.android.registerTransform(new ComCodeTransform(project))</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        project.apply plugin: &apos;com.android.library&apos;</span><br><span class="line">        System.out.println(&quot;apply plugin is &quot; + &apos;com.android.library&apos;)</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  为了方便查看，省略了部分代码，其实很简单，这个gradle插件会读取已经定义好的配置，如果用户自己设置为某个module的’isRunAlone’值为true，则调用apply plugin: ‘com.android.application’, 但是当用户当前运行的是主工程时，则忽略这个配置，只有主工程为application其他工程自动修改为library，即做到了根据实际情况去决定到底是application还是library。</p>
+<p>  同时这里也体现了另外一个重要的问题，就是<strong>代码隔离</strong>，即在开发编写代码阶段，根本引用不了不同组件里的代码，上面的做法做到了物理隔离，即我们在IDE里连import都不行，不同组件之间只能通过预先定好的方式进行调用，不用担心原有代码被随意修改，减少不稳定因素。</p>
+<p>  上面提到的都是基于Android Studio module级别的隔离，module过多时会影响编译效率，而且有时候我们需要一种粒度更细的隔离，微信在<a href="https://mp.weixin.qq.com/s?__biz=MzAwNDY1ODY2OQ==&amp;mid=2649286672&amp;idx=1&amp;sn=4d9db00c496fcafd1d3e01d69af083f9&amp;chksm=8334cc92b4434584e8bdb117274f41145fb49ba467ec0cd9ba5e3551a8abf92f1996bd6b147a&amp;mpshare=1&amp;scene=1&amp;srcid=0628hswEvee7LPRaUnkZLr2w#rd" target="_blank" rel="noopener">微信android模块化架构重构实践</a> 一文中提供另外了一种代码隔离的 方式，即pins工程，微信并没有给出具体的实现，我们可以通过一个简单的demo来模拟，</p>
+<p>  <img src="/img/1/20180626105329.png" alt="20180626105329"></p>
+<p>  配置文件如下</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    compileSdkVersion Integer.parseInt(project.ANDROID_BUILD_SDK_VERSION)</span><br><span class="line">    buildToolsVersion project.ANDROID_BUILD_TOOLS_VERSION</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    sourceSets &#123;</span><br><span class="line">        main &#123;</span><br><span class="line"></span><br><span class="line">            manifest.srcFile &apos;src/runalone/main/AndroidManifest.xml&apos; </span><br><span class="line"></span><br><span class="line">            java.srcDir(&quot;src/runalone/main/java&quot;)</span><br><span class="line">            res.srcDir(&quot;src/runalone/main/res&quot;)</span><br><span class="line"></span><br><span class="line">            def dirs = [&apos;p_user_profile&apos;, &apos;p_user_info&apos;]</span><br><span class="line"></span><br><span class="line">            dirs.each &#123; dir -&gt;</span><br><span class="line">                java.srcDir(&quot;src/$dir/main/java&quot;)</span><br><span class="line">                res.srcDir(&quot;src/$dir/main/res&quot;)</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  <strong>gradle 3.0以后支持了多种依赖方式</strong></p>
+<table>
+<thead>
+<tr>
+<th>gralde 3.0以上</th>
+<th>gradle 2.x</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>implementation</td>
+<td>compile</td>
+<td>编译期间只对直接依赖的组件可见，在运行期间所有组件可见</td>
+</tr>
+<tr>
+<td>api</td>
+<td>compile</td>
+<td>编译期，运行期对所有组件可见</td>
+</tr>
+<tr>
+<td>compileOnly</td>
+<td>provided</td>
+<td>只参与编译不打包到apk</td>
+</tr>
+<tr>
+<td>runtimeOnly</td>
+<td>apk</td>
+<td>编译期间不可见，会打包到apk</td>
+</tr>
+</tbody>
+</table>
+<p>  直观上来看api与compile基本没区别，对于implementation, 假如我们有A, B，C三个模块，B使用implementation 依赖了A, 同时C用implementation依赖了B, 那么在编译期C不能直接访问A里面的类。同时当A里面的类进行修改时，gradle只会重新编译B，不回重新编译C，以此提高编译效率。</p>
+<p>  对于runtimeOnly 看起来很符合代码隔离的需求，但是不支持aar，gradle 3.0 runtimeOnly开始支持aar，但是不支持资源隔离。</p>
+<p>  如果只要求代码隔离，那么runtimeOnly基本是符合需求的，也不要自己编写任何代码。</p>
+<ul>
+<li><p>资源隔离</p>
+<p>一般项目中除了代码当然还有资源，资源隔离一个比较常见的问题是资源冲突，假如A, B两人同时分别在comonent_a和component_b模块中开发，理想的情况肯定是A,B不需要互相干预，可以任意定义和使用资源，但是不要忘了我们最终只会打包成一个apk，所以资源冲突是一个必须解决的问题，假设A在模块component_a中开发定义了一个字符串资源demo_string=”demo_string_a”，B在模块B中也定义个同样key的字符串demo_string=”demo_string_b”, 这个时候就出问题了，目前通常的做法是在gradle配置文件中加入</p>
+<p>资源前缀</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">resource_prefix = &quot;component_a&quot;</span><br></pre></td></tr></table></figure>
+<p>可惜的是，即使这样配置了Android Studio并不会为每个模块的资源自动命名，实际只是在lint过程中加了一次检查，当每个模块里面的资源没有按照配置添加前缀时会导致编译失败。</p>
+<p><img src="/img/1/20180626110721.png" alt="20180626110721"></p>
+</li>
+<li><p><strong>组件通信机制</strong></p>
+<p>组件间被互相隔离那么必然存在组件间怎样通信的问题，这也是各种组件化框架差异比较大的地方，</p>
+<p>|                | 微信     | JIMU(DDComponent) | CC/ModularizationArchitecture | 爱奇艺Andromeda               | 阿里ARouter   |<br>| ————– | ——– | —————– | —————————– | —————————– | ————- |<br>| 通信机制       | 接口下沉 | 接口下沉+路由     | 组件总线(协议通信)            | 支持跨进程的接口下沉+事件总线 | 接口下沉+路由 |<br>| 是否支持跨进程 |          | No                | Yes                           | Yes                           | No            |</p>
+<p>组件间通信的方式目前常见的就是上面的几种，我们简单看下这几种方式</p>
+<ul>
+<li><strong>路由</strong>:比较著名的是阿里的ARouter，不过目前主要主要用来进行UI跳转，下面会有介绍。</li>
+<li><strong>事件总线</strong>：早在组件化前eventbus就已经被广泛使用，强大的解耦能力和非常方便的调用方式一度非常受欢迎，然而随着项目越来越大，事件总线也暴露出不少问题，项目中的event越来越多，调用逻辑不清晰，调试困难，过度解耦导致的项目太过松散，导致很多代码基本不敢动<strong>。</strong></li>
+<li><strong>组件总线(协议通信)</strong>: </li>
+</ul>
+<p>我们通过一段简单的代码来看下协议通信：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cc = CC.obtainBuilder(&quot;component_a&quot;)</span><br><span class="line">                        .setActionName(&quot;showActivityA&quot;)</span><br><span class="line">                        .build();</span><br><span class="line">result = cc.call();</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public class ComponentA implements IComponent &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        //组件的名称，调用此组件的方式：</span><br><span class="line">        return &quot;component_a&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public boolean onCall(CC cc) &#123;</span><br><span class="line">        String actionName = cc.getActionName();</span><br><span class="line">        switch (actionName) &#123;</span><br><span class="line">            case &quot;showActivityA&quot;:</span><br><span class="line">                openActivity(cc);</span><br><span class="line">                break;</span><br><span class="line">            ...</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>简单来说<strong>组件总线的本质是转发调用请求</strong> ，各个组件通过字符串的方式，暴露可以调用的接口，调用方，通过预先定义好的功能字符串来进行调用，相当于定义了一个协议，使用方通过预先定义好的协议进行调用。</p>
+<p>好处在于通用性很高，解耦程度也高 ，然而对于协议通信，协议的制定和修改需要让通信双方都能够获知，同时当协议更改时，双方的协议更新同步也会比较复杂，而且容易出错。</p>
+<ul>
+<li><strong>接口下沉</strong>：数据结构+接口，这也是微信推荐的通信方式，个人也非常赞同，实现和维护都很简单，也没有复杂的调用过程。</li>
+</ul>
+<p>我们直接看下demo</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">public class ComponentManager &#123;</span><br><span class="line"></span><br><span class="line">    private ComponentManager() &#123;&#125;</span><br><span class="line"></span><br><span class="line">    private static Map&lt;Class, IComponent&gt; mComponents = new HashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    public static  &lt;T extends IComponent&gt; T get (Class&lt;T&gt; clz) &#123;</span><br><span class="line">        if (!clz.isInterface()) &#123;</span><br><span class="line">            throw new RuntimeException(String.format(&quot;clz %s should be a interface class&quot;, clz.getCanonicalName()));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return (T) mComponents.get(clz);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static &lt;T extends IComponent&gt; void register (Class&lt;T&gt; clz, T impl) &#123;</span><br><span class="line">        if (clz == null || impl == null) &#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if (mComponents.containsKey(clz)) &#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        mComponents.put(clz, impl);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void unRegister (Class clz) &#123;</span><br><span class="line">        if (clz == null) &#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        mComponents.remove(clz);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public interface IUserComponent extends IComponent &#123;</span><br><span class="line"></span><br><span class="line">    public long getWmid();</span><br><span class="line">    public boolean isLoginOK();</span><br><span class="line">    public boolean isVip();</span><br><span class="line">    public boolean isVVip();</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">public class UserComponent implements IUserComponent &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public long getWmid() &#123;</span><br><span class="line">        return 10086;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public boolean isLoginOK() &#123;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public boolean isVip() &#123;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public boolean isVVip() &#123;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">注册</span><br><span class="line">ComponentManager.register(IUserComponent.class, new UserComponent());</span><br><span class="line"></span><br><span class="line">调用代码</span><br><span class="line">UserComponent component = ComponentManager.get(IUserComponent.class);</span><br><span class="line">component.getWmid()</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>支持跨进程的接口通信</strong></p>
+<p>照理来说接口通信已经相当完美，还有什么问题呢？ 随着项目越来越庞大，很多的项目开始使用了多进程，对于默认的接口通信机制并不支持多进程，因为接口管理类是在一个进程中注册的，其他进程是拿不到的。 假如进程间的调用不多，那么可以对每个接口自己编写aidl，把跨进程的调用隐藏在对外的接口中。 </p>
+<p>一般的多进程通信机制如ModularizationArchitecture中描述</p>
+<p><img src="/img/1/20180626171324.png" alt="20180626171324"></p>
+<p>即有个专门用来管理各个进程暴露的接口的进程我们叫路由进程，这个进程可以是在主进程或者单独新开的进程里(保证这个进程的生命周期最长即可)，每个进程向这个进程注册自己的服务，每次当进程A需要调用进程N里的接口时，先通过路由进程获取进程N的binder引用，然后再进行调用。即每次通信都需要有两次IPC调用，爱奇艺的Andromeda对此进行了优化</p>
+<p><img src="/img/1/163aeed44d514808.jpg" alt="163aeed44d514808"></p>
+<p>可以这么理解，当进程A向路由进程注册自己的服务时，路由进程里持有所有进程的服务管理类Dispather会反向将自己注册回进程A，每个进程都有一个RemoteManger类用来保存这个引用，当进程A需要进程N的服务时，可以直接通过刚刚保存的所有进程的服务管理类Dispather的引用获取进程N的接口binder引用，同时缓存下来，那么当下一次进程A需要进程N的服务时，可以直接用刚刚缓存下来的引用进行调用，就只需要一次IPC调用了。</p>
+</li>
+</ul>
+<ul>
+<li><p>页面跳转方式</p>
+<p>页面跳转可以用组件间通信的方式来实现，即暴露一个接口，直接调这个接口去startActivity，然而很多时候可能会有很多的页面跳转，这样就需要写很多的接口，而实际上这些接口除了打开一个新的页面，没有其他用处，同时很多时候页面跳转是一次性行为，使用接口看起来会很重，可以认为页面跳转是比接口调用更为轻量级的一种通信方式，我们需要一种更加轻量级的方式，目前很流行的方式就是Router。</p>
+<p>Router有比较多的实现，我们来看下阿里的ARouter的调用方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@Route(path = &quot;/test/activity&quot;)</span><br><span class="line">public class YourActivity extend Activity &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ARouter.getInstance().build(&quot;/test/activity&quot;).navigation();</span><br><span class="line"></span><br><span class="line">ARouter.getInstance().build(&quot;/test/1&quot;)</span><br><span class="line">			.withLong(&quot;key1&quot;, 666L)</span><br><span class="line">			.withString(&quot;key3&quot;, &quot;888&quot;)</span><br><span class="line">			.withObject(&quot;key4&quot;, new Test(&quot;Jack&quot;, &quot;Rose&quot;))</span><br><span class="line">			.navigation();</span><br></pre></td></tr></table></figure>
+<p>可以看到确实比原生的startAcivity调用更加方便，参数的传递也更加简单，那除了方便还有还什么理由要用Router呢?</p>
+<ul>
+<li><p>解耦。通过路由的方式，我们不再需要直接显式地调用相关的Activity，少了很多的直接代码依赖。</p>
+</li>
+<li><p>动态拦截 ，出错处理。原生的startActivity方式完全由系统管理，无法控制，通过路由处理，我们可以进行拦截，比如跳转的页面需要登录，那我们可以先跳到登录页面，登录成功后再打开后面的页面，同时我们也可以在跳转出错时进行降级处理。</p>
+</li>
+<li>统一跳转，H5，Android, iOS可以统一跳转方式，对于一些场景比如一些推送点击后的需要打开的页面，<br>我们也可以很方便地进行配置。</li>
+</ul>
+</li>
+</ul>
+<p>目前Router的方案有很多，阿里<a href="https://github.com/alibaba/ARouter" target="_blank" rel="noopener">ARouter</a>，Airbnb<a href="https://github.com/airbnb/DeepLinkDispatch" target="_blank" rel="noopener">DeepLinkDispatch</a>，<a href="https://github.com/mzule/ActivityRouter" target="_blank" rel="noopener">ActivityRouter</a> 等， <a href="https://www.jianshu.com/p/8a3eeeaf01e8" target="_blank" rel="noopener">Android 组件化 —— 路由设计最佳实践</a>做了比较详细的对比，这里不再赘述。</p>
+<ul>
+<li><p>数据传输</p>
+<p>为什么要用content provider</p>
+</li>
+</ul>
+<p>四，总结</p>
+<p>​    Android组件化目前虽然并没有统一的解决方案，也有一些问题，但是基本都有对应的解决或者规避方法。我们只需要根据实际情况选择合适的方案即可。还有很多其他问题需要我们认真去思考。</p>
+<p>​    项目到底需不需要组件化？</p>
+<p>​    个人觉得对于一些比较小，开发人员少的项目，不需要考虑了，强行使用组件化只会增加维护和开发成本。当然这不意味着放任代码肆意发展，需要开发人员自己把握，随时做好重构的准备。</p>
+<p>​    怎样实施组件化？</p>
+<p>​    看了很多文章，组件化的思想很清晰，但是实际实施起来确实困难重重，陈旧又庞大的代码，牵一发而动全身，并行进行的业务需求开发，项目稳定性要求等等，导致重构难以进行。<a href="https://mp.weixin.qq.com/s?__biz=MzAwNDY1ODY2OQ==&amp;mid=2649286672&amp;idx=1&amp;sn=4d9db00c496fcafd1d3e01d69af083f9&amp;chksm=8334cc92b4434584e8bdb117274f41145fb49ba467ec0cd9ba5e3551a8abf92f1996bd6b147a&amp;mpshare=1&amp;scene=1&amp;srcid=0628hswEvee7LPRaUnkZLr2w#rd" target="_blank" rel="noopener">微信android模块化架构重构实践</a>和<a href="https://juejin.im/post/5b255f6ce51d45588f2d1f89" target="_blank" rel="noopener">业内首个支持渐进式组件化的开源框架</a>都提供了很好的经验，组件化或者说重构都是一件需要循序渐进的事，不可能像修复bug一样一下改完直接合入，我们可以立即开始，处理好新老代码并存的情况，这样就可以跟随版本迭代不停完善，逐步迁移到新的代码上，即“拆分” -&gt; “灰度“ -&gt; ”回流“。</p>
+<p>​        <strong>好的架构不是设计出来的，而是演进出来的。</strong> 不同项目在不同的阶段需要不同的架构，适合的才是最好的。</p>
+<p>参考文章：</p>
+<p><a href="https://www.jianshu.com/p/1b1d77f58e84" target="_blank" rel="noopener">Android彻底组件化方案实践</a></p>
+<p><a href="https://mp.weixin.qq.com/s/6Q818XA5FaHd7jJMFBG60w" target="_blank" rel="noopener">微信Android模块化重构实践</a></p>
+<p><a href="https://juejin.im/post/5a4b4425518825128654eef4" target="_blank" rel="noopener">聚美组件化实践之路</a></p>
+<p><a href="https://mp.weixin.qq.com/s?__biz=MjM5NjQ5MTI5OA==&amp;mid=2651747704&amp;idx=1&amp;sn=93c4a5c76b78bc998fa0dab1fdd4547d&amp;chksm=bd12ac358a652523fdf541a5e04d7aad9fb849e5c460aa7dd2c5cbb4c821ccaedde0be147b7c&amp;scene=0#rd" target="_blank" rel="noopener">美团外卖Android平台化架构演进实践</a></p>
+<p><a href="http://blog.spinytech.com/2016/12/28/android_modularization/" target="_blank" rel="noopener">Android架构思考(模块化、多进程)</a></p>
+<p><a href="https://www.jianshu.com/p/452367cbb7be" target="_blank" rel="noopener">悦跑圈Android单业务开发，提高编译效率15倍</a></p>
+<p><a href="https://blog.csdn.net/cdecde111/article/details/79322846" target="_blank" rel="noopener">总结一波安卓组件化开源方案</a></p>
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzI2OTQxMTM4OQ==&amp;mid=2247486330&amp;idx=1&amp;sn=be588d5eac6660708d669dbb071f519a&amp;chksm=eae1fe28dd96773e9025008d56f8bd321d62d85e95afba51686c4b0361cd3baad08312385aae#rd" target="_blank" rel="noopener">刚刚，爱奇艺发布重磅开源项目！</a></p>
+<p><a href="https://www.jianshu.com/p/8a3eeeaf01e8" target="_blank" rel="noopener">Android 组件化 —— 路由设计最佳实践</a><br><a href="https://juejin.im/post/5b255f6ce51d45588f2d1f89" target="_blank" rel="noopener">业内首个支持渐进式组件化的开源框架</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/10/switchch-to-hexo/" rel="next" title="博客升级">
+                <i class="fa fa-chevron-left"></i> 博客升级
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://avatars2.githubusercontent.com/u/2089949?s=460&v=4" alt="Waterstar">
+            
+              <p class="site-author-name" itemprop="name">Waterstar</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/waterstar2012" title="GitHub &rarr; https://github.com/waterstar2012" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Waterstar</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
