@@ -127,7 +127,7 @@
 <meta property="og:image" content="http://yoursite.com/img/in-post/android-memory-optimize/monitor2.png">
 <meta property="og:image" content="http://yoursite.com/img/in-post/android-memory-optimize/result1.png">
 <meta property="og:image" content="http://yoursite.com/img/in-post/android-memory-optimize/result2.png">
-<meta property="og:updated_time" content="2019-05-10T10:01:37.292Z">
+<meta property="og:updated_time" content="2019-05-10T13:57:34.571Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android内存优化总结&amp;实践">
 <meta name="twitter:description" content="最近在公司写了一篇总结，没有涉及什么内部数据，直接转到这里吧。如果需要转载，麻烦联系我。 &amp;emsp;&amp;emsp;智能手机发展到今天已经有十几个年头，手机的软硬件都已经发生了翻天覆地的变化，特别是Android阵营，从一开始的一两百M到今天动辄4G，6G内存。然而大部分的开发者观看下自己的异常上报系统，还是会发现各种内存问题仍然层出不穷，各种OOM为crash率贡献不少。Android开发发展到今">
@@ -357,7 +357,7 @@
                 
                   <span class="post-meta-item-text">Bearbeitet am</span>
                 
-                <time title="Geändert am: 2019-05-10 18:01:37" itemprop="dateModified" datetime="2019-05-10T18:01:37+08:00">2019-05-10</time>
+                <time title="Geändert am: 2019-05-10 21:57:34" itemprop="dateModified" datetime="2019-05-10T21:57:34+08:00">2019-05-10</time>
               
             
           </span>
@@ -392,7 +392,8 @@
 
       
         <p>最近在公司写了一篇总结，没有涉及什么内部数据，直接转到这里吧。如果需要转载，麻烦联系我。</p>
-<p>&emsp;&emsp;智能手机发展到今天已经有十几个年头，手机的软硬件都已经发生了翻天覆地的变化，特别是Android阵营，从一开始的一两百M到今天动辄4G，6G内存。然而大部分的开发者观看下自己的异常上报系统，还是会发现各种内存问题仍然层出不穷，各种OOM为crash率贡献不少。Android开发发展到今天也是已经比较成熟，各种新框架，新技术也是层出不穷，而内存优化一直都是Android开发过程一个不可避免的话题。 恰好最近做了内存优化相关的工作，这里也对Android内存优化相关的知识做下总结。<br>  <br>在开始文章之前推荐下 Google官方<a href="https://www.youtube.com/playlist?list=PLWz5rJ2EKKc9CBxr3BVjPTPoDPLdPIFCE" target="_blank" rel="noopener">Android性能优化典范</a>系列和公司同事<a href="http://hukai.me/" target="_blank" rel="noopener">翻译整理版本</a>，以及KM文章<a href="http://km.oa.com/group/1746/articles/show/185418" target="_blank" rel="noopener">深度揭秘安卓内存</a>，因为篇幅有限这里我对一些内容只做简单总结，同时如果有不正确内容也麻烦帮忙指正。</p>
+<p>&emsp;&emsp;智能手机发展到今天已经有十几个年头，手机的软硬件都已经发生了翻天覆地的变化，特别是Android阵营，从一开始的一两百M到今天动辄4G，6G内存。然而大部分的开发者观看下自己的异常上报系统，还是会发现各种内存问题仍然层出不穷，各种OOM为crash率贡献不少。Android开发发展到今天也是已经比较成熟，各种新框架，新技术也是层出不穷，而内存优化一直都是Android开发过程一个不可避免的话题。 恰好最近做了内存优化相关的工作，这里也对Android内存优化相关的知识做下总结。</p>
+<p><a id="more"></a>  <br>  <br>在开始文章之前推荐下 Google官方<a href="https://www.youtube.com/playlist?list=PLWz5rJ2EKKc9CBxr3BVjPTPoDPLdPIFCE" target="_blank" rel="noopener">Android性能优化典范</a>系列和公司同事<a href="http://hukai.me/" target="_blank" rel="noopener">翻译整理版本</a>，以及KM文章<a href="http://km.oa.com/group/1746/articles/show/185418" target="_blank" rel="noopener">深度揭秘安卓内存</a>，因为篇幅有限这里我对一些内容只做简单总结，同时如果有不正确内容也麻烦帮忙指正。</p>
 <p>  本文将会对Android内存优化相关的知识进行总结以及最后案例分析(一二部分是理论知识总结，你也可以直接跳到第三部分看案例)：<br>  一 Android内存分配回收机制<br>  二 Android常见内存问题和对应检测，解决方式。<br>  三 JOOX内存优化案例<br>  四 总结</p>
 <p>  工欲善其事必先利其器，想要优化App的内存占用，那么还是需要先了解Android系统的内存分配和回收机制。</p>
 <p>#一 ，Android内存分配回收机制<br>  参考<a href="http://www.ibm.com/developerworks/cn/opensource/os-cn-android-mmry-rcycl/" target="_blank" rel="noopener">Android 操作系统的内存回收机制</a>,这里简单做下总结：<br>  从宏观角度上来看Android系统可以分为三个层次:<br>&emsp;&emsp;1 Application Framework, 2 Dalvik 虚拟机，3 Linux内核。<br>  这三个层次都有各自内存相关工作：<br>  1 Application Framework： Anroid基于进程中运行的组件及其状态规定了默认的五个回收优先级：<br>   <img src="/img/in-post/android-memory-optimize/android_process.png" alt="img"><br>  Empty process(空进程)，Background process(后台进程)，Service process(服务进程)，Visible process(可见进程)  Foreground process(前台进程)<br>  系统需要进行内存回收时最先回收空进程,然后是后台进程，以此类推最后才会回收前台进程(一般情况下前台进程就是与用户交互的进程了,如果连前台进程都需要回收那么此时系统几乎不可用了)。<br>  由此也衍生了很多进程保活的方法(提高优先级，互相唤醒，native保活等等)，出现了国内各种全家桶，甚至各种杀不死的进程。<br>  Android中由ActivityManagerService 集中管理所有进程的内存资源分配。  </p>
