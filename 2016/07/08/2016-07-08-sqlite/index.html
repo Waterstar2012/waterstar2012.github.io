@@ -72,7 +72,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '7.1.1',
-    sidebar: {"position":"left","display":"always","offset":12,"onmobile":false,"dimmer":false},
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
     back2top: true,
     back2top_sidebar: false,
     fancybox: false,
@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="Waterstar&#39;s Blog">
 <meta property="og:description" content="部分内容来自网络。 1，建表优化拆分数据表，可以通过外键等方式尽量减少数据条目。 2，建立索引关于数据库索引的原理为什么建立索引可以加快查询速度请看 http://kb.cnblogs.com/page/45712/  建立索引的语句1CREATE INDEX index_name ON table_name; 创建单例索引1CREATE INDEX index_name ON table_nam">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-09T13:05:12.199Z">
+<meta property="og:updated_time" content="2019-05-10T09:49:26.259Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android Sqlite优化">
 <meta name="twitter:description" content="部分内容来自网络。 1，建表优化拆分数据表，可以通过外键等方式尽量减少数据条目。 2，建立索引关于数据库索引的原理为什么建立索引可以加快查询速度请看 http://kb.cnblogs.com/page/45712/  建立索引的语句1CREATE INDEX index_name ON table_name; 创建单例索引1CREATE INDEX index_name ON table_nam">
@@ -193,7 +193,7 @@
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="Navigationsleiste an/ausschalten">
+    <button aria-label="Cambiar a barra de navegación">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -221,7 +221,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Inicio</a>
 
   </li>
 
@@ -309,14 +309,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Publicado el</span>
               
 
               
                 
               
 
-              <time title="Erstellt: 2016-07-08 23:29:00" itemprop="dateCreated datePublished" datetime="2016-07-08T23:29:00+08:00">2016-07-08</time>
+              <time title="Creado por: 2016-07-08 23:29:00" itemprop="dateCreated datePublished" datetime="2016-07-08T23:29:00+08:00">2016-07-08</time>
             
 
             
@@ -331,9 +331,9 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Bearbeitet am</span>
+                  <span class="post-meta-item-text">Editado el</span>
                 
-                <time title="Geändert am: 2019-05-09 21:05:12" itemprop="dateModified" datetime="2019-05-09T21:05:12+08:00">2019-05-09</time>
+                <time title="Modificado por: 2019-05-10 17:49:26" itemprop="dateModified" datetime="2019-05-10T17:49:26+08:00">2019-05-10</time>
               
             
           </span>
@@ -373,10 +373,7 @@
 <p>建立索引的语句<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE INDEX index_name ON table_name;</span><br></pre></td></tr></table></figure></p>
 <p>创建单例索引<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE INDEX index_name ON table_name (column_name);</span><br></pre></td></tr></table></figure></p>
 <p>索引会额外增加空间，另外对插入，更新，删除等操作因为需要更新索引，所以反而导致性能问题。</p>
-<p><strong>3，显式使用事务</strong><br></p>
-<p>在Android中，无论是使用SQLiteDatabase的insert,delete等方法还是execSQL都开启了事务，来确保每一次操作都具有原子性，使得结果要么是操作之后的正确结果，要么是操作之前的结果。</p>
-<p>然而事务的实现是依赖于名为rollback journal文件，借助这个临时文件来完成原子操作和回滚功能。既然属于文件，就符合Unix的文件范型(Open-Read/Write-Close)，因而对于批量的修改操作会出现反复打开文件读写再关闭的操作。然而好在，我们可以显式使用事务，将批量的数据库更新带来的journal文件打开关闭降低到1次。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">private void insertWithTransaction(SQLiteDatabase db) &#123;</span><br><span class="line">    int count = 0;</span><br><span class="line">    ContentValues values = new ContentValues();</span><br><span class="line">    try &#123;</span><br><span class="line">        db.beginTransaction();</span><br><span class="line">        while (count++ &lt; 100) &#123;</span><br><span class="line">            values.put(TableDefine.COLUMN_INSERT_TIME, System.currentTimeMillis());</span><br><span class="line">            db.insert(TableDefine.TABLE_RECORD, null, values);</span><br><span class="line">        &#125;</span><br><span class="line">          db.setTransactionSuccessful();</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        db.endTransaction();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>   <br><br><strong>3，显式使用事务</strong><br><br><br>在Android中，无论是使用SQLiteDatabase的insert,delete等方法还是execSQL都开启了事务，来确保每一次操作都具有原子性，使得结果要么是操作之后的正确结果，要么是操作之前的结果。<br><br>然而事务的实现是依赖于名为rollback journal文件，借助这个临时文件来完成原子操作和回滚功能。既然属于文件，就符合Unix的文件范型(Open-Read/Write-Close)，因而对于批量的修改操作会出现反复打开文件读写再关闭的操作。然而好在，我们可以显式使用事务，将批量的数据库更新带来的journal文件打开关闭降低到1次。<br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">private void insertWithTransaction(SQLiteDatabase db) &#123;</span><br><span class="line">    int count = 0;</span><br><span class="line">    ContentValues values = new ContentValues();</span><br><span class="line">    try &#123;</span><br><span class="line">        db.beginTransaction();</span><br><span class="line">        while (count++ &lt; 100) &#123;</span><br><span class="line">            values.put(TableDefine.COLUMN_INSERT_TIME, System.currentTimeMillis());</span><br><span class="line">            db.insert(TableDefine.TABLE_RECORD, null, values);</span><br><span class="line">        &#125;</span><br><span class="line">          db.setTransactionSuccessful();</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        db.endTransaction();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>4，编译sql语句</strong><br><br>Android封装了ContentValues，但是查看源码可以看到，ContentValues在最终执行时也会编译SQL语句，也就是批量操作时，使用ContentValues时会导致多次编译sql语句，所以对于一些批量插入的情况可以用SQLiteStatement，提前编译。</p>
 <p>比如下面这样</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">private void insertWithPreCompiledStatement(SQLiteDatabase db) &#123;</span><br><span class="line">    String sql = &quot;INSERT INTO &quot; + TableDefine.TABLE_RECORD + &quot;( &quot; +            </span><br><span class="line">    TableDefine.COLUMN_INSERT_TIME + &quot;) VALUES(?)&quot;;</span><br><span class="line">    SQLiteStatement  statement = db.compileStatement(sql);</span><br><span class="line">    int count = 0;</span><br><span class="line">    while (count &lt; 100) &#123;</span><br><span class="line">        count++;</span><br><span class="line">        statement.clearBindings();</span><br><span class="line">        statement.bindLong(1, System.currentTimeMillis());</span><br><span class="line">        statement.executeInsert();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -494,7 +491,7 @@
                   <a href="/archives">
                 
                     <span class="site-state-item-count">5</span>
-                    <span class="site-state-item-name">Artikel</span>
+                    <span class="site-state-item-name">entradas</span>
                   </a>
                 </div>
               
@@ -513,7 +510,7 @@
                       
                     
                     <span class="site-state-item-count">2</span>
-                    <span class="site-state-item-name">schlagwörter</span>
+                    <span class="site-state-item-name">tags</span>
                   
                 </div>
               
@@ -581,7 +578,7 @@
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Creado mediante <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 
@@ -589,7 +586,7 @@
 
 
 
-  <div class="theme-info">Design – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+  <div class="theme-info">Tema – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
 
 
 

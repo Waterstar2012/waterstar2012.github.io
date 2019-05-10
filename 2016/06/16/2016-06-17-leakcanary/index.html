@@ -72,7 +72,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '7.1.1',
-    sidebar: {"position":"left","display":"always","offset":12,"onmobile":false,"dimmer":false},
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
     back2top: true,
     back2top_sidebar: false,
     fancybox: false,
@@ -96,21 +96,21 @@
 
 
 
-  <meta name="description" content="Andorid LeakCanary内存泄露分析LeakCanary是Square出的一个直接在移动端可视化查看分析内存泄露的库。  Square这家公司牛逼了，很多大名鼎鼎的Android开源库都是这家公司贡献了，比如OkHttp,Retrofit,Picasso,otto等等，具体可以上Square的Gihub账号查看。 1，先感官认识下使用过程 运行leakcanary-sample工程按照">
+  <meta name="description" content="Andorid LeakCanary内存泄露分析LeakCanary是Square出的一个直接在移动端可视化查看分析内存泄露的库。">
 <meta name="keywords" content="博客">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android LeakCanary内存泄露分析">
 <meta property="og:url" content="http://yoursite.com/2016/06/16/2016-06-17-leakcanary/index.html">
 <meta property="og:site_name" content="Waterstar&#39;s Blog">
-<meta property="og:description" content="Andorid LeakCanary内存泄露分析LeakCanary是Square出的一个直接在移动端可视化查看分析内存泄露的库。  Square这家公司牛逼了，很多大名鼎鼎的Android开源库都是这家公司贡献了，比如OkHttp,Retrofit,Picasso,otto等等，具体可以上Square的Gihub账号查看。 1，先感官认识下使用过程 运行leakcanary-sample工程按照">
+<meta property="og:description" content="Andorid LeakCanary内存泄露分析LeakCanary是Square出的一个直接在移动端可视化查看分析内存泄露的库。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/img/in-post/leakcanary/1.jpg">
 <meta property="og:image" content="http://yoursite.com/img/in-post/leakcanary/2.jpg">
 <meta property="og:image" content="http://yoursite.com/img/in-post/leakcanary/3.jpg">
-<meta property="og:updated_time" content="2019-05-09T13:05:12.198Z">
+<meta property="og:updated_time" content="2019-05-10T10:02:01.313Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android LeakCanary内存泄露分析">
-<meta name="twitter:description" content="Andorid LeakCanary内存泄露分析LeakCanary是Square出的一个直接在移动端可视化查看分析内存泄露的库。  Square这家公司牛逼了，很多大名鼎鼎的Android开源库都是这家公司贡献了，比如OkHttp,Retrofit,Picasso,otto等等，具体可以上Square的Gihub账号查看。 1，先感官认识下使用过程 运行leakcanary-sample工程按照">
+<meta name="twitter:description" content="Andorid LeakCanary内存泄露分析LeakCanary是Square出的一个直接在移动端可视化查看分析内存泄露的库。">
 <meta name="twitter:image" content="http://yoursite.com/img/in-post/leakcanary/1.jpg">
 
 
@@ -197,7 +197,7 @@
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="Navigationsleiste an/ausschalten">
+    <button aria-label="Cambiar a barra de navegación">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -225,7 +225,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Inicio</a>
 
   </li>
 
@@ -313,14 +313,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Publicado el</span>
               
 
               
                 
               
 
-              <time title="Erstellt: 2016-06-16 00:20:00" itemprop="dateCreated datePublished" datetime="2016-06-16T00:20:00+08:00">2016-06-16</time>
+              <time title="Creado por: 2016-06-16 00:20:00" itemprop="dateCreated datePublished" datetime="2016-06-16T00:20:00+08:00">2016-06-16</time>
             
 
             
@@ -335,9 +335,9 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Bearbeitet am</span>
+                  <span class="post-meta-item-text">Editado el</span>
                 
-                <time title="Geändert am: 2019-05-09 21:05:12" itemprop="dateModified" datetime="2019-05-09T21:05:12+08:00">2019-05-09</time>
+                <time title="Modificado por: 2019-05-10 18:02:01" itemprop="dateModified" datetime="2019-05-10T18:02:01+08:00">2019-05-10</time>
               
             
           </span>
@@ -372,12 +372,7 @@
 
       
         <h1 id="Andorid-LeakCanary内存泄露分析"><a href="#Andorid-LeakCanary内存泄露分析" class="headerlink" title="Andorid LeakCanary内存泄露分析"></a>Andorid LeakCanary内存泄露分析</h1><p><a href="https://github.com/square/leakcanary" target="_blank" rel="noopener">LeakCanary</a>是Square出的一个直接在移动端可视化查看分析内存泄露的库。 </p>
-<p>Square这家公司牛逼了，很多大名鼎鼎的Android开源库都是这家公司贡献了，比如OkHttp,Retrofit,Picasso,otto等等，具体可以上<a href="https://github.com/square" target="_blank" rel="noopener">Square的Gihub账号</a>查看。</p>
-<p>1，先感官认识下使用过程</p>
-<p>运行leakcanary-sample工程<br><img src="/img/in-post/leakcanary/1.jpg" alt="img"><br>按照demo上的说明，点击start new asynctask然后旋转屏幕，这样可以多操作几次。过了一分钟左右在通知栏会弹出一个消息，就是内存泄露的通知了。<br><img src="/img/in-post/leakcanary/2.jpg" alt="img"><br>点击进去就是内存泄露的分析页面了，看起来挺精确的。<br><img src="/img/in-post/leakcanary/3.jpg" alt="img"></p>
-<p>2，leakcanary使用&amp;demo代码简单分析</p>
-<p>官方的readme已经说明了使用方法<br>在<code>build.gradle</code>里引用库</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">dependencies</span> &#123;</span><br><span class="line">  debugCompile <span class="string">'com.squareup.leakcanary:leakcanary-android:1.4-beta2'</span></span><br><span class="line">  releaseCompile <span class="string">'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'</span></span><br><span class="line">  testCompile <span class="string">'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>   <br><br>Square这家公司牛逼了，很多大名鼎鼎的Android开源库都是这家公司贡献了，比如OkHttp,Retrofit,Picasso,otto等等，具体可以上<a href="https://github.com/square" target="_blank" rel="noopener">Square的Gihub账号</a>查看。<br><br>1，先感官认识下使用过程<br><br>运行leakcanary-sample工程<br><img src="/img/in-post/leakcanary/1.jpg" alt="img"><br>按照demo上的说明，点击start new asynctask然后旋转屏幕，这样可以多操作几次。过了一分钟左右在通知栏会弹出一个消息，就是内存泄露的通知了。<br><img src="/img/in-post/leakcanary/2.jpg" alt="img"><br>点击进去就是内存泄露的分析页面了，看起来挺精确的。<br><img src="/img/in-post/leakcanary/3.jpg" alt="img"><br><br>2，leakcanary使用&amp;demo代码简单分析<br><br>官方的readme已经说明了使用方法<br>在<code>build.gradle</code>里引用库<br><br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">dependencies</span> &#123;</span><br><span class="line">  debugCompile <span class="string">'com.squareup.leakcanary:leakcanary-android:1.4-beta2'</span></span><br><span class="line">  releaseCompile <span class="string">'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'</span></span><br><span class="line">  testCompile <span class="string">'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>然后在工程的自定义<code>Application</code>类里</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleApplication</span> <span class="keyword">extends</span> <span class="title">Application</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onCreate();</span><br><span class="line">    LeakCanary.install(<span class="keyword">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>就可以了。。</p>
@@ -477,10 +472,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Inhaltsverzeichnis
+            Tabla de contenidos
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Übersicht
+            Inicio
           </li>
         </ul>
       
@@ -503,7 +498,7 @@
                   <a href="/archives">
                 
                     <span class="site-state-item-count">5</span>
-                    <span class="site-state-item-name">Artikel</span>
+                    <span class="site-state-item-name">entradas</span>
                   </a>
                 </div>
               
@@ -522,7 +517,7 @@
                       
                     
                     <span class="site-state-item-count">2</span>
-                    <span class="site-state-item-name">schlagwörter</span>
+                    <span class="site-state-item-name">tags</span>
                   
                 </div>
               
@@ -607,7 +602,7 @@
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Creado mediante <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 
@@ -615,7 +610,7 @@
 
 
 
-  <div class="theme-info">Design – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+  <div class="theme-info">Tema – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
 
 
 

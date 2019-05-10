@@ -72,7 +72,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '7.1.1',
-    sidebar: {"position":"left","display":"always","offset":12,"onmobile":false,"dimmer":false},
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
     back2top: true,
     back2top_sidebar: false,
     fancybox: false,
@@ -96,18 +96,18 @@
 
 
 
-  <meta name="description" content="Android卡顿检测方案目前有两种：1，基于Looper的检测方案。2，基于Choreographer的帧率检测方案 分别简单介绍下这两种方案的基本实现原理。 基于Looper检测方案 实际上这种方案已经有比较成熟的实现，例如AndroidPerformanceMonitor(原来也叫BlockCanary)，作者在自己的博客上也有实现原理的介绍BlockCanary — 轻松找出Android">
+  <meta name="description" content="Android卡顿检测方案目前有两种：1，基于Looper的检测方案。2，基于Choreographer的帧率检测方案 分别简单介绍下这两种方案的基本实现原理。">
 <meta name="keywords" content="Android">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android 卡顿检测方案">
 <meta property="og:url" content="http://yoursite.com/2016/10/22/2016-10-23-android-anr-detect/index.html">
 <meta property="og:site_name" content="Waterstar&#39;s Blog">
-<meta property="og:description" content="Android卡顿检测方案目前有两种：1，基于Looper的检测方案。2，基于Choreographer的帧率检测方案 分别简单介绍下这两种方案的基本实现原理。 基于Looper检测方案 实际上这种方案已经有比较成熟的实现，例如AndroidPerformanceMonitor(原来也叫BlockCanary)，作者在自己的博客上也有实现原理的介绍BlockCanary — 轻松找出Android">
+<meta property="og:description" content="Android卡顿检测方案目前有两种：1，基于Looper的检测方案。2，基于Choreographer的帧率检测方案 分别简单介绍下这两种方案的基本实现原理。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-09T13:05:12.200Z">
+<meta property="og:updated_time" content="2019-05-10T10:02:21.644Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android 卡顿检测方案">
-<meta name="twitter:description" content="Android卡顿检测方案目前有两种：1，基于Looper的检测方案。2，基于Choreographer的帧率检测方案 分别简单介绍下这两种方案的基本实现原理。 基于Looper检测方案 实际上这种方案已经有比较成熟的实现，例如AndroidPerformanceMonitor(原来也叫BlockCanary)，作者在自己的博客上也有实现原理的介绍BlockCanary — 轻松找出Android">
+<meta name="twitter:description" content="Android卡顿检测方案目前有两种：1，基于Looper的检测方案。2，基于Choreographer的帧率检测方案 分别简单介绍下这两种方案的基本实现原理。">
 
 
 
@@ -193,7 +193,7 @@
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="Navigationsleiste an/ausschalten">
+    <button aria-label="Cambiar a barra de navegación">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -221,7 +221,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Inicio</a>
 
   </li>
 
@@ -309,14 +309,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Publicado el</span>
               
 
               
                 
               
 
-              <time title="Erstellt: 2016-10-22 23:29:00" itemprop="dateCreated datePublished" datetime="2016-10-22T23:29:00+08:00">2016-10-22</time>
+              <time title="Creado por: 2016-10-22 23:29:00" itemprop="dateCreated datePublished" datetime="2016-10-22T23:29:00+08:00">2016-10-22</time>
             
 
             
@@ -331,9 +331,9 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Bearbeitet am</span>
+                  <span class="post-meta-item-text">Editado el</span>
                 
-                <time title="Geändert am: 2019-05-09 21:05:12" itemprop="dateModified" datetime="2019-05-09T21:05:12+08:00">2019-05-09</time>
+                <time title="Modificado por: 2019-05-10 18:02:21" itemprop="dateModified" datetime="2019-05-10T18:02:21+08:00">2019-05-10</time>
               
             
           </span>
@@ -369,8 +369,7 @@
       
         <p>Android卡顿检测方案目前有两种：<br><br>1，基于Looper的检测方案。<br>2，基于Choreographer的帧率检测方案</p>
 <p>分别简单介绍下这两种方案的基本实现原理。</p>
-<p><strong>基于Looper检测方案</strong> <br><br>实际上这种方案已经有比较成熟的实现，例如<a href="https://github.com/markzhai/AndroidPerformanceMonitor" target="_blank" rel="noopener">AndroidPerformanceMonitor</a>(原来也叫BlockCanary)，作者在自己的博客上也有实现原理的介绍<a href="http://blog.zhaiyifan.cn/2016/01/16/BlockCanaryTransparentPerformanceMonitor/" target="_blank" rel="noopener">BlockCanary — 轻松找出Android App界面卡顿元凶</a>, 这里稍微总结一下。<br><br>Looper.java有这么一段</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">loop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (;;) &#123;</span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line">        <span class="comment">// This must be in a local variable, in case a UI event sets the logger</span></span><br><span class="line">        Printer logging = me.mLogging;</span><br><span class="line">        <span class="keyword">if</span> (logging != <span class="keyword">null</span>) &#123;</span><br><span class="line">            logging.println(<span class="string">"&gt;&gt;&gt;&gt;&gt; Dispatching to "</span> + msg.target + <span class="string">" "</span> +</span><br><span class="line">                    msg.callback + <span class="string">": "</span> + msg.what);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        msg.target.dispatchMessage(msg);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (logging != <span class="keyword">null</span>) &#123;</span><br><span class="line">            logging.println(<span class="string">"&lt;&lt;&lt;&lt;&lt; Finished to "</span> + msg.target + <span class="string">" "</span> + msg.callback);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>   <br><br><strong>基于Looper检测方案</strong> <br><br>实际上这种方案已经有比较成熟的实现，例如<a href="https://github.com/markzhai/AndroidPerformanceMonitor" target="_blank" rel="noopener">AndroidPerformanceMonitor</a>(原来也叫BlockCanary)，作者在自己的博客上也有实现原理的介绍<a href="http://blog.zhaiyifan.cn/2016/01/16/BlockCanaryTransparentPerformanceMonitor/" target="_blank" rel="noopener">BlockCanary — 轻松找出Android App界面卡顿元凶</a>, 这里稍微总结一下。<br><br>Looper.java有这么一段<br><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">loop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (;;) &#123;</span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line">        <span class="comment">// This must be in a local variable, in case a UI event sets the logger</span></span><br><span class="line">        Printer logging = me.mLogging;</span><br><span class="line">        <span class="keyword">if</span> (logging != <span class="keyword">null</span>) &#123;</span><br><span class="line">            logging.println(<span class="string">"&gt;&gt;&gt;&gt;&gt; Dispatching to "</span> + msg.target + <span class="string">" "</span> +</span><br><span class="line">                    msg.callback + <span class="string">": "</span> + msg.what);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        msg.target.dispatchMessage(msg);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (logging != <span class="keyword">null</span>) &#123;</span><br><span class="line">            logging.println(<span class="string">"&lt;&lt;&lt;&lt;&lt; Finished to "</span> + msg.target + <span class="string">" "</span> + msg.callback);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>即Looper的dispatchMessaeg方法的前后都用了一个Printer打印了log，而且这个printer是支持开发者自定义的，我们可以自己实现一个Printer，并通过<br>Looper.getMainLooper().setMessageLogging(mainLooperPrinter);设置进去，这个时候就可以检测dispatchMessage的市长了，另外我们可以通过定时去dump线程堆栈，且通过上面的自定义Printer标记可以判断两次打 tag 的间隔是否超过设定的阈值，如果超过阈值，则dump当前所有的 Java 线程堆栈，然后进行数据上报。</p>
 <p><strong>基于Choreographer的帧率检测方案</strong> <br><br>Android 4.1中为了改善Android的卡顿问题，Google提出了project butter， 其中非常有名的vsync 16ms机制，就是在这个项目中提出的。 详情可以看Google在方法放出的<a href="https://www.youtube.com/playlist?list=PLWz5rJ2EKKc9CBxr3BVjPTPoDPLdPIFCE" target="_blank" rel="noopener">Android性能优化典范</a>,实际上这里也有很多相关的中文文章。Choreographer就是整个vsnyc中很重要的一个类，它会根据vsync信号，来统筹消息，动画以及绘图等相关操作。网上有一些介绍<a href="http://blog.csdn.net/farmer_cc/article/details/18619429" target="_blank" rel="noopener">深入分析UI 上层事件处理核心机制 Choreographer</a>。<br><br>以下是Choreographer的部分源码</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">FrameHandler</span> <span class="keyword">extends</span> <span class="title">Handler</span> </span>&#123;</span><br><span class="line">       <span class="function"><span class="keyword">public</span> <span class="title">FrameHandler</span><span class="params">(Looper looper)</span> </span>&#123;</span><br><span class="line">           <span class="keyword">super</span>(looper);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="meta">@Override</span></span><br><span class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleMessage</span><span class="params">(Message msg)</span> </span>&#123;</span><br><span class="line">           <span class="keyword">switch</span> (msg.what) &#123;</span><br><span class="line">               <span class="keyword">case</span> MSG_DO_FRAME:</span><br><span class="line">                   doFrame(System.nanoTime(), <span class="number">0</span>);</span><br><span class="line">                   <span class="keyword">break</span>;</span><br><span class="line">               <span class="keyword">case</span> MSG_DO_SCHEDULE_VSYNC:</span><br><span class="line">                   doScheduleVsync();</span><br><span class="line">                   <span class="keyword">break</span>;</span><br><span class="line">               <span class="keyword">case</span> MSG_DO_SCHEDULE_CALLBACK:</span><br><span class="line">                   doScheduleCallback(msg.arg1);</span><br><span class="line">                   <span class="keyword">break</span>;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
@@ -488,7 +487,7 @@
                   <a href="/archives">
                 
                     <span class="site-state-item-count">5</span>
-                    <span class="site-state-item-name">Artikel</span>
+                    <span class="site-state-item-name">entradas</span>
                   </a>
                 </div>
               
@@ -507,7 +506,7 @@
                       
                     
                     <span class="site-state-item-count">2</span>
-                    <span class="site-state-item-name">schlagwörter</span>
+                    <span class="site-state-item-name">tags</span>
                   
                 </div>
               
@@ -575,7 +574,7 @@
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Creado mediante <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 
@@ -583,7 +582,7 @@
 
 
 
-  <div class="theme-info">Design – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+  <div class="theme-info">Tema – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
 
 
 

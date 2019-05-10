@@ -72,7 +72,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '7.1.1',
-    sidebar: {"position":"left","display":"always","offset":12,"onmobile":false,"dimmer":false},
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
     back2top: true,
     back2top_sidebar: false,
     fancybox: false,
@@ -189,7 +189,7 @@
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="Navigationsleiste an/ausschalten">
+    <button aria-label="Cambiar a barra de navegación">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -217,7 +217,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Inicio</a>
 
   </li>
 
@@ -307,14 +307,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Publicado el</span>
               
 
               
                 
               
 
-              <time title="Erstellt: 2019-05-10 11:49:51 / Geändert am: 09:49:10" itemprop="dateCreated datePublished" datetime="2019-05-10T11:49:51+08:00">2019-05-10</time>
+              <time title="Creado por: 2019-05-10 11:49:51 / Modificado por: 09:49:10" itemprop="dateCreated datePublished" datetime="2019-05-10T11:49:51+08:00">2019-05-10</time>
             
 
             
@@ -458,14 +458,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Publicado el</span>
               
 
               
                 
               
 
-              <time title="Erstellt: 2017-03-09 00:20:00" itemprop="dateCreated datePublished" datetime="2017-03-09T00:20:00+08:00">2017-03-09</time>
+              <time title="Creado por: 2017-03-09 00:20:00" itemprop="dateCreated datePublished" datetime="2017-03-09T00:20:00+08:00">2017-03-09</time>
             
 
             
@@ -480,9 +480,9 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Bearbeitet am</span>
+                  <span class="post-meta-item-text">Editado el</span>
                 
-                <time title="Geändert am: 2019-05-09 21:05:12" itemprop="dateModified" datetime="2019-05-09T21:05:12+08:00">2019-05-09</time>
+                <time title="Modificado por: 2019-05-10 18:01:37" itemprop="dateModified" datetime="2019-05-10T18:01:37+08:00">2019-05-10</time>
               
             
           </span>
@@ -752,14 +752,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Publicado el</span>
               
 
               
                 
               
 
-              <time title="Erstellt: 2016-10-22 23:29:00" itemprop="dateCreated datePublished" datetime="2016-10-22T23:29:00+08:00">2016-10-22</time>
+              <time title="Creado por: 2016-10-22 23:29:00" itemprop="dateCreated datePublished" datetime="2016-10-22T23:29:00+08:00">2016-10-22</time>
             
 
             
@@ -774,9 +774,9 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Bearbeitet am</span>
+                  <span class="post-meta-item-text">Editado el</span>
                 
-                <time title="Geändert am: 2019-05-09 21:05:12" itemprop="dateModified" datetime="2019-05-09T21:05:12+08:00">2019-05-09</time>
+                <time title="Modificado por: 2019-05-10 18:02:21" itemprop="dateModified" datetime="2019-05-10T18:02:21+08:00">2019-05-10</time>
               
             
           </span>
@@ -811,19 +811,17 @@
 
       
         
-          
-            <p>Android卡顿检测方案目前有两种：<br><br>1，基于Looper的检测方案。<br>2，基于Choreographer的帧率检测方案</p>
+          <p>Android卡顿检测方案目前有两种：<br><br>1，基于Looper的检测方案。<br>2，基于Choreographer的帧率检测方案</p>
 <p>分别简单介绍下这两种方案的基本实现原理。</p>
-<p><strong>基于Looper检测方案</strong> <br><br>实际上这种方案已经有比较成熟的实现，例如<a href="https://github.com/markzhai/AndroidPerformanceMonitor" target="_blank" rel="noopener">AndroidPerformanceMonitor</a>(原来也叫BlockCanary)，作者在自己的博客上也有实现原理的介绍<a href="http://blog.zhaiyifan.cn/2016/01/16/BlockCanaryTransparentPerformanceMonitor/" target="_blank" rel="noopener">BlockCanary — 轻松找出Android App界面卡顿元凶</a>, 这里稍微总结一下。<br><br>Looper.java有这么一段</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">loop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (;;) &#123;</span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line">        <span class="comment">// This must be in a local variable, in case a UI event sets the logger</span></span><br><span class="line">        Printer logging = me.mLogging;</span><br><span class="line">        <span class="keyword">if</span> (logging != <span class="keyword">null</span>) &#123;</span><br><span class="line">            logging.println(<span class="string">"&gt;&gt;&gt;&gt;&gt; Dispatching to "</span> + msg.target + <span class="string">" "</span> +</span><br><span class="line">                    msg.callback + <span class="string">": "</span> + msg.what);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        msg.target.dispatchMessage(msg);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (logging != <span class="keyword">null</span>) &#123;</span><br><span class="line">            logging.println(<span class="string">"&lt;&lt;&lt;&lt;&lt; Finished to "</span> + msg.target + <span class="string">" "</span> + msg.callback);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>即Looper的dispatchMessaeg方法的前后都用了一个Printer打印了log，而且这个printer是支持开发者自定义的，我们可以自己实现一个Printer，并通过<br>Looper.getMainLooper().setMessageLogging(mainLooperPrinter);设置进去，这个时候就可以检测dispatchMessage的市长了，另外我们可以通过定时去dump线程堆栈，且通过上面的自定义Printer标记可以判断两次打 tag 的间隔是否超过设定的阈值，如果超过阈值，则dump当前所有的 Java 线程堆栈，然后进行数据上报。</p>
-<p><strong>基于Choreographer的帧率检测方案</strong> <br><br>Android 4.1中为了改善Android的卡顿问题，Google提出了project butter， 其中非常有名的vsync 16ms机制，就是在这个项目中提出的。 详情可以看Google在方法放出的<a href="https://www.youtube.com/playlist?list=PLWz5rJ2EKKc9CBxr3BVjPTPoDPLdPIFCE" target="_blank" rel="noopener">Android性能优化典范</a>,实际上这里也有很多相关的中文文章。Choreographer就是整个vsnyc中很重要的一个类，它会根据vsync信号，来统筹消息，动画以及绘图等相关操作。网上有一些介绍<a href="http://blog.csdn.net/farmer_cc/article/details/18619429" target="_blank" rel="noopener">深入分析UI 上层事件处理核心机制 Choreographer</a>。<br><br>以下是Choreographer的部分源码</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">FrameHandler</span> <span class="keyword">extends</span> <span class="title">Handler</span> </span>&#123;</span><br><span class="line">       <span class="function"><span class="keyword">public</span> <span class="title">FrameHandler</span><span class="params">(Looper looper)</span> </span>&#123;</span><br><span class="line">           <span class="keyword">super</span>(looper);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="meta">@Override</span></span><br><span class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleMessage</span><span class="params">(Message msg)</span> </span>&#123;</span><br><span class="line">           <span class="keyword">switch</span> (msg.what) &#123;</span><br><span class="line">               <span class="keyword">case</span> MSG_DO_FRAME:</span><br><span class="line">                   doFrame(System.nanoTime(), <span class="number">0</span>);</span><br><span class="line">                   <span class="keyword">break</span>;</span><br><span class="line">               <span class="keyword">case</span> MSG_DO_SCHEDULE_VSYNC:</span><br><span class="line">                   doScheduleVsync();</span><br><span class="line">                   <span class="keyword">break</span>;</span><br><span class="line">               <span class="keyword">case</span> MSG_DO_SCHEDULE_CALLBACK:</span><br><span class="line">                   doScheduleCallback(msg.arg1);</span><br><span class="line">                   <span class="keyword">break</span>;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">doFrame</span><span class="params">(<span class="keyword">long</span> frameTimeNanos, <span class="keyword">int</span> frame)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">long</span> startNanos;</span><br><span class="line">        <span class="keyword">synchronized</span> (mLock) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!mFrameScheduled) &#123;</span><br><span class="line">                <span class="keyword">return</span>; <span class="comment">// no work to do</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            startNanos = System.nanoTime();</span><br><span class="line">            <span class="keyword">final</span> <span class="keyword">long</span> jitterNanos = startNanos - frameTimeNanos;</span><br><span class="line">            <span class="keyword">if</span> (jitterNanos &gt;= mFrameIntervalNanos) &#123;</span><br><span class="line">                <span class="keyword">final</span> <span class="keyword">long</span> skippedFrames = jitterNanos / mFrameIntervalNanos;</span><br><span class="line">                <span class="keyword">if</span> (skippedFrames &gt;= SKIPPED_FRAME_WARNING_LIMIT) &#123;</span><br><span class="line">                    Log.i(TAG, <span class="string">"Skipped "</span> + skippedFrames + <span class="string">" frames!  "</span></span><br><span class="line">                            + <span class="string">"The application may be doing too much work on its main thread."</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">final</span> <span class="keyword">long</span> lastFrameOffset = jitterNanos % mFrameIntervalNanos;</span><br><span class="line">                <span class="keyword">if</span> (DEBUG) &#123;</span><br><span class="line">                    Log.d(TAG, <span class="string">"Missed vsync by "</span> + (jitterNanos * <span class="number">0.000001f</span>) + <span class="string">" ms "</span></span><br><span class="line">                            + <span class="string">"which is more than the frame interval of "</span></span><br><span class="line">                            + (mFrameIntervalNanos * <span class="number">0.000001f</span>) + <span class="string">" ms!  "</span></span><br><span class="line">                            + <span class="string">"Skipping "</span> + skippedFrames + <span class="string">" frames and setting frame "</span></span><br><span class="line">                            + <span class="string">"time to "</span> + (lastFrameOffset * <span class="number">0.000001f</span>) + <span class="string">" ms in the past."</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                frameTimeNanos = startNanos - lastFrameOffset;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (frameTimeNanos &lt; mLastFrameTimeNanos) &#123;</span><br><span class="line">                <span class="keyword">if</span> (DEBUG) &#123;</span><br><span class="line">                    Log.d(TAG, <span class="string">"Frame time appears to be going backwards.  May be due to a "</span></span><br><span class="line">                            + <span class="string">"previously skipped frame.  Waiting for next vsync."</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                scheduleVsyncLocked();</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            mFrameScheduled = <span class="keyword">false</span>;</span><br><span class="line">            mLastFrameTimeNanos = frameTimeNanos;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        doCallbacks(Choreographer.CALLBACK_INPUT, frameTimeNanos);</span><br><span class="line">        doCallbacks(Choreographer.CALLBACK_ANIMATION, frameTimeNanos);</span><br><span class="line">        doCallbacks(Choreographer.CALLBACK_TRAVERSAL, frameTimeNanos);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (DEBUG) &#123;</span><br><span class="line">            <span class="keyword">final</span> <span class="keyword">long</span> endNanos = System.nanoTime();</span><br><span class="line">            Log.d(TAG, <span class="string">"Frame "</span> + frame + <span class="string">": Finished, took "</span></span><br><span class="line">                    + (endNanos - startNanos) * <span class="number">0.000001f</span> + <span class="string">" ms, latency "</span></span><br><span class="line">                    + (startNanos - frameTimeNanos) * <span class="number">0.000001f</span> + <span class="string">" ms."</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>github上同样也有一个开源的帧率检测小工具<a href="https://github.com/friendlyrobotnyc/TinyDancer" target="_blank" rel="noopener">TinyDancer</a>, 可以参考其中的FPSFrameCallback.java的实现。我们可以在每一帧被渲染的时候记录下它开始渲染的时间，这样在下一帧被处理时，我们就可以判断上一帧在渲染过程中是否出现掉帧，而整个过程都是实时处理的。</p>
-<p><strong>总结</strong> <br><br>对于这两种方案，第一种方案比较适合在发布前进行测试或者小范围灰度测试然后定位问题，第二种方案适合监控线上环境的 app 的掉帧情况来计算 app 在某些场景的流畅度然后有针对性的做性能优化。</p>
-
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2016/10/22/2016-10-23-android-anr-detect/" rel="contents">
+                Leer más &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -916,14 +914,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Publicado el</span>
               
 
               
                 
               
 
-              <time title="Erstellt: 2016-07-08 23:29:00" itemprop="dateCreated datePublished" datetime="2016-07-08T23:29:00+08:00">2016-07-08</time>
+              <time title="Creado por: 2016-07-08 23:29:00" itemprop="dateCreated datePublished" datetime="2016-07-08T23:29:00+08:00">2016-07-08</time>
             
 
             
@@ -938,9 +936,9 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Bearbeitet am</span>
+                  <span class="post-meta-item-text">Editado el</span>
                 
-                <time title="Geändert am: 2019-05-09 21:05:12" itemprop="dateModified" datetime="2019-05-09T21:05:12+08:00">2019-05-09</time>
+                <time title="Modificado por: 2019-05-10 17:49:26" itemprop="dateModified" datetime="2019-05-10T17:49:26+08:00">2019-05-10</time>
               
             
           </span>
@@ -975,25 +973,21 @@
 
       
         
-          
-            <p>部分内容来自网络。</p>
+          <p>部分内容来自网络。</p>
 <p><strong>1，建表优化</strong><br><br>拆分数据表，可以通过外键等方式尽量减少数据条目。</p>
 <p><strong>2，建立索引</strong><br><br>关于数据库索引的原理为什么建立索引可以加快查询速度请看 <a href="http://kb.cnblogs.com/page/45712/" target="_blank" rel="noopener">http://kb.cnblogs.com/page/45712/</a> <br></p>
 <p>建立索引的语句<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE INDEX index_name ON table_name;</span><br></pre></td></tr></table></figure></p>
 <p>创建单例索引<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE INDEX index_name ON table_name (column_name);</span><br></pre></td></tr></table></figure></p>
 <p>索引会额外增加空间，另外对插入，更新，删除等操作因为需要更新索引，所以反而导致性能问题。</p>
-<p><strong>3，显式使用事务</strong><br></p>
-<p>在Android中，无论是使用SQLiteDatabase的insert,delete等方法还是execSQL都开启了事务，来确保每一次操作都具有原子性，使得结果要么是操作之后的正确结果，要么是操作之前的结果。</p>
-<p>然而事务的实现是依赖于名为rollback journal文件，借助这个临时文件来完成原子操作和回滚功能。既然属于文件，就符合Unix的文件范型(Open-Read/Write-Close)，因而对于批量的修改操作会出现反复打开文件读写再关闭的操作。然而好在，我们可以显式使用事务，将批量的数据库更新带来的journal文件打开关闭降低到1次。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">private void insertWithTransaction(SQLiteDatabase db) &#123;</span><br><span class="line">    int count = 0;</span><br><span class="line">    ContentValues values = new ContentValues();</span><br><span class="line">    try &#123;</span><br><span class="line">        db.beginTransaction();</span><br><span class="line">        while (count++ &lt; 100) &#123;</span><br><span class="line">            values.put(TableDefine.COLUMN_INSERT_TIME, System.currentTimeMillis());</span><br><span class="line">            db.insert(TableDefine.TABLE_RECORD, null, values);</span><br><span class="line">        &#125;</span><br><span class="line">          db.setTransactionSuccessful();</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        db.endTransaction();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>4，编译sql语句</strong><br><br>Android封装了ContentValues，但是查看源码可以看到，ContentValues在最终执行时也会编译SQL语句，也就是批量操作时，使用ContentValues时会导致多次编译sql语句，所以对于一些批量插入的情况可以用SQLiteStatement，提前编译。</p>
-<p>比如下面这样</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">private void insertWithPreCompiledStatement(SQLiteDatabase db) &#123;</span><br><span class="line">    String sql = &quot;INSERT INTO &quot; + TableDefine.TABLE_RECORD + &quot;( &quot; +            </span><br><span class="line">    TableDefine.COLUMN_INSERT_TIME + &quot;) VALUES(?)&quot;;</span><br><span class="line">    SQLiteStatement  statement = db.compileStatement(sql);</span><br><span class="line">    int count = 0;</span><br><span class="line">    while (count &lt; 100) &#123;</span><br><span class="line">        count++;</span><br><span class="line">        statement.clearBindings();</span><br><span class="line">        statement.bindLong(1, System.currentTimeMillis());</span><br><span class="line">        statement.executeInsert();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>5，Sqlite语句优化</strong><br><br>因为sqlite实现原理问题，有些sql查询可以优化<br><br>比如在sqlite中between,or,like等语句不能使用索引，另外一些常见的sql优化，比如嵌套查询时，通常是先查出一个表，再在这个表的基础上做二次查询，此时因为新查出来的表没有建立索引，所以会比较慢，可以尽量展开为对已有索引的查询。sqlite官方有文档说明，请看<a href="http://www.sqlite.org/optoverview.html" target="_blank" rel="noopener">The SQLite Query Planner</a>。</p>
-<p><strong>6，其他</strong><br><br><strong>调整ContentValues容量</strong><br><br>SQLiteDatabase提供了方便的ContentValues简化了我们处理列名与值的映射，ContentValues内部采用了HashMap来存储Key-Value数据，ContentValues的初始容量是8，如果当添加的数据超过8之前，则会进行双倍扩容操作，因此建议对ContentValues填入的内容进行估量，设置合理的初始化容量，减少不必要的内部扩容操作。</p>
-<p><strong>减少查询的数据量，按需查询</strong><br><br><strong>getColumnIndex耗时问题，可以直接编码数据库的列数，尽量少用getColumnInex</strong><br><br><strong>使用异步</strong><br></p>
-
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2016/07/08/2016-07-08-sqlite/" rel="contents">
+                Leer más &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -1086,14 +1080,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Publicado el</span>
               
 
               
                 
               
 
-              <time title="Erstellt: 2016-06-16 00:20:00" itemprop="dateCreated datePublished" datetime="2016-06-16T00:20:00+08:00">2016-06-16</time>
+              <time title="Creado por: 2016-06-16 00:20:00" itemprop="dateCreated datePublished" datetime="2016-06-16T00:20:00+08:00">2016-06-16</time>
             
 
             
@@ -1108,9 +1102,9 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Bearbeitet am</span>
+                  <span class="post-meta-item-text">Editado el</span>
                 
-                <time title="Geändert am: 2019-05-09 21:05:12" itemprop="dateModified" datetime="2019-05-09T21:05:12+08:00">2019-05-09</time>
+                <time title="Modificado por: 2019-05-10 18:02:01" itemprop="dateModified" datetime="2019-05-10T18:02:01+08:00">2019-05-10</time>
               
             
           </span>
@@ -1145,25 +1139,16 @@
 
       
         
+          <h1 id="Andorid-LeakCanary内存泄露分析"><a href="#Andorid-LeakCanary内存泄露分析" class="headerlink" title="Andorid LeakCanary内存泄露分析"></a>Andorid LeakCanary内存泄露分析</h1><p><a href="https://github.com/square/leakcanary" target="_blank" rel="noopener">LeakCanary</a>是Square出的一个直接在移动端可视化查看分析内存泄露的库。 </p>
+          <!--noindex-->
           
-            <h1 id="Andorid-LeakCanary内存泄露分析"><a href="#Andorid-LeakCanary内存泄露分析" class="headerlink" title="Andorid LeakCanary内存泄露分析"></a>Andorid LeakCanary内存泄露分析</h1><p><a href="https://github.com/square/leakcanary" target="_blank" rel="noopener">LeakCanary</a>是Square出的一个直接在移动端可视化查看分析内存泄露的库。 </p>
-<p>Square这家公司牛逼了，很多大名鼎鼎的Android开源库都是这家公司贡献了，比如OkHttp,Retrofit,Picasso,otto等等，具体可以上<a href="https://github.com/square" target="_blank" rel="noopener">Square的Gihub账号</a>查看。</p>
-<p>1，先感官认识下使用过程</p>
-<p>运行leakcanary-sample工程<br><img src="/img/in-post/leakcanary/1.jpg" alt="img"><br>按照demo上的说明，点击start new asynctask然后旋转屏幕，这样可以多操作几次。过了一分钟左右在通知栏会弹出一个消息，就是内存泄露的通知了。<br><img src="/img/in-post/leakcanary/2.jpg" alt="img"><br>点击进去就是内存泄露的分析页面了，看起来挺精确的。<br><img src="/img/in-post/leakcanary/3.jpg" alt="img"></p>
-<p>2，leakcanary使用&amp;demo代码简单分析</p>
-<p>官方的readme已经说明了使用方法<br>在<code>build.gradle</code>里引用库</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">dependencies</span> &#123;</span><br><span class="line">  debugCompile <span class="string">'com.squareup.leakcanary:leakcanary-android:1.4-beta2'</span></span><br><span class="line">  releaseCompile <span class="string">'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'</span></span><br><span class="line">  testCompile <span class="string">'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>然后在工程的自定义<code>Application</code>类里</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleApplication</span> <span class="keyword">extends</span> <span class="title">Application</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onCreate();</span><br><span class="line">    LeakCanary.install(<span class="keyword">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>就可以了。。</p>
-<p>demo里面基本只有MainActivity.java</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span> <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">    setContentView(R.layout.main_activity);</span><br><span class="line"></span><br><span class="line">    View button = findViewById(R.id.async_task);</span><br><span class="line">    button.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</span><br><span class="line">      <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</span><br><span class="line">        startAsyncTask();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">startAsyncTask</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// This async task is an anonymous class and therefore has a hidden reference to the outer</span></span><br><span class="line">    <span class="comment">// class MainActivity. If the activity gets destroyed before the task finishes (e.g. rotation),</span></span><br><span class="line">    <span class="comment">// the activity instance will leak.</span></span><br><span class="line">    <span class="keyword">new</span> AsyncTask&lt;Void, Void, Void&gt;() &#123;</span><br><span class="line">      <span class="meta">@Override</span> <span class="function"><span class="keyword">protected</span> Void <span class="title">doInBackground</span><span class="params">(Void... params)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// Do some slow work in background</span></span><br><span class="line">        SystemClock.sleep(<span class="number">20000</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;.execute();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>简单来说就是点下按钮然后旋转屏幕，然后再点下按钮，在旋转屏幕。<br>泄露的原因跟hanlder常见的泄露原因一样，就是java的非静态匿名内部类会引用外部类，每次开启一个匿名的AsyncTask后再旋转屏幕时，因为匿名AsyncTask的引用导致没法回收。</p>
-<p>3 原理简单分析</p>
-<p>leakcanary通过开启后台线程检查引用是否清除，然后调用GC，再把 heap 内存 dump 到 APP 对应的文件系统中的一个 .hprof 文件中， 在开另外一个线程通过调用<a href="https://github.com/square/haha" target="_blank" rel="noopener">HAHA</a>(Headless Android Heap Analyzer 也是Square开源的库，用来分析.hprof，这样看来leakcanary跟mat基本是一样的)，然后再发个到通知栏消息，点击把结果展示出来。网上有篇介绍的文章。 <a href="http://www.liaohuqiu.net/cn/posts/leak-canary-read-me/" target="_blank" rel="noopener">LeakCanary 中文使用说明</a></p>
-<p>就酱</p>
-
+            <div class="post-button text-center">
+              <a class="btn" href="/2016/06/16/2016-06-17-leakcanary/" rel="contents">
+                Leer más &raquo;
+              </a>
+            </div>
           
+          <!--/noindex-->
         
       
     </div>
@@ -1248,7 +1233,7 @@
                   <a href="/archives">
                 
                     <span class="site-state-item-count">5</span>
-                    <span class="site-state-item-name">Artikel</span>
+                    <span class="site-state-item-name">entradas</span>
                   </a>
                 </div>
               
@@ -1267,7 +1252,7 @@
                       
                     
                     <span class="site-state-item-count">2</span>
-                    <span class="site-state-item-name">schlagwörter</span>
+                    <span class="site-state-item-name">tags</span>
                   
                 </div>
               
@@ -1335,7 +1320,7 @@
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Creado mediante <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 
@@ -1343,7 +1328,7 @@
 
 
 
-  <div class="theme-info">Design – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+  <div class="theme-info">Tema – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
 
 
 
